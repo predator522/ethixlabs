@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>F̸A̸C̸ ShΔdow's Tools — ShadowEthix</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="index.html" class="logo silver">ShadowEthix</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="community.html">Community</a>
+      <a href="tools.html" class="active">Tools</a>
+    </div>
+  </nav>
+
+  <!-- Page -->
+  <main class="page">
+    <h1 class="highlight">F̸A̸C̸ ShΔdow's Tools</h1>
+    <p class="subtitle">Click on a tool to reveal its access link & access code — or open it directly.</p>
+
+    <!-- Tools Grid -->
+    <div class="tools-grid" id="toolsGrid">
+<article class="tool-card">
+  <h3>⚡ Synkit v1 web toolkit</h3>
+  <p class="tool-desc">Synkit v1 – the ultimate web-based toolkit for hackers and tech enthusiasts. Streamline your workflows, automate tasks, and explore cutting-edge tech tools—all in one platform.</p>
+  <div class="tool-actions">
+    <button 
+      class="tool-btn reveal-btn" 
+      data-link="https://synkit-v1.vercel.app/" 
+      data-code="F̸A̸C̸ ShΔDow">
+      Reveal Access
+    </button>
+    <a 
+      class="tool-btn" 
+      href="https://synkit-v1.vercel.app/" 
+      target="_blank" 
+      rel="noopener">
+      Open Direct
+    </a>
+  </div>
+</article>
+    
+
+  
+  </main>
+
+  <!-- Modal -->
+  <div id="accessModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modalTitle">
+    <div class="modal-content">
+      <button id="modalClose" class="modal-close" aria-label="Close">✕</button>
+      <h2 id="modalTitle" class="silver">Tool Access</h2>
+      <p class="modal-desc">Below is the direct link and access code for this tool.</p>
+
+      <div class="modal-row">
+        <label>Link</label>
+        <div class="modal-field">
+          <input id="modalLink" readonly />
+          <button class="copy-btn" data-copy-target="modalLink">Copy Link</button>
+          <a id="openLinkBtn" class="tool-btn" target="_blank" rel="noopener">Open</a>
+        </div>
+      </div>
+
+      <div class="modal-row">
+        <label>Access Code</label>
+        <div class="modal-field">
+          <input id="modalCode" readonly />
+          <button class="copy-btn" data-copy-target="modalCode">Copy Code</button>
+        </div>
+      </div>
+
+      <p class="modal-foot">If the code is missing, the tool opens directly without a code.</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>⚡ Founded in 2025 by <span class="silver">F̸A̸C̸ ShΔdow</span> | ShadowEthix ⚡</p>
+  </footer>
+
+<script>
+(function(){
+  const modal = document.getElementById('accessModal');
+  const modalLink = document.getElementById('modalLink');
+  const modalCode = document.getElementById('modalCode');
+  const openLinkBtn = document.getElementById('openLinkBtn');
+  const closeBtn = document.getElementById('modalClose');
+
+  function openModal(link, code) {
+    modalLink.value = link || '';
+    modalCode.value = code || '';
+    openLinkBtn.href = link || '#';
+    modal.setAttribute('aria-hidden', 'false');
+    modal.classList.add('open');
+    closeBtn.focus();
+  }
+  function closeModal(){
+    modal.setAttribute('aria-hidden', 'true');
+    modal.classList.remove('open');
+    modalLink.value = '';
+    modalCode.value = '';
+  }
+
+  // Reveal tool modal
+  document.querySelectorAll('.reveal-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const link = btn.getAttribute('data-link') || '';
+      const code = btn.getAttribute('data-code') || '';
+      openModal(link, code);
+    });
+  });
+
+  // Copy button logic with glow
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const targetId = btn.getAttribute('data-copy-target');
+      const input = document.getElementById(targetId);
+      if (!input) return;
+      try {
+        await navigator.clipboard.writeText(input.value);
+        btn.textContent = 'Copied';
+        btn.classList.add('copied');
+        setTimeout(()=>{
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 1400);
+      } catch (e) {
+        alert('Copy failed — select manually.');
+      }
+    });
+  });
+
+  // Close modal events
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e)=> { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+})();
+
+// Smooth page fade-in
+document.addEventListener("DOMContentLoaded", () => {
+  document.body.classList.add("fade-in");
+});
+</script>
+</body>
+</html>
